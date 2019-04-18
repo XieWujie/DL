@@ -1,6 +1,6 @@
 package com.example.downloadhelp.listener;
 
-public interface DLProgressListener extends DLListener{
+public interface DLProgressListener {
 
     void onProgress(int loaded,int totalLength);
 

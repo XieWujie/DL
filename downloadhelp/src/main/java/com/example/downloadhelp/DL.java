@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import com.example.downloadhelp.cache.Fetch;
 import com.example.downloadhelp.cache.Save;
+import com.example.downloadhelp.request.DLRequestBuilder;
 
 import java.io.File;
 import java.util.List;
@@ -85,6 +86,18 @@ public class DL {
 
     }
 
+    public static void init(String defaultPath){
+        DLBuilder builder = new DLBuilder();
+        builder.setDefaultPath(defaultPath);
+        getInstance(dlBuilder);
+    }
+
+    public static DLRequestBuilder<File> load(String url){
+        if (dlManager == null || dl == null){
+            getInstance (dlBuilder == null ?getDefaultDLBuilder(null):dlBuilder);
+        }
+        return dlManager.load(url);
+    }
 
     private static DLBuilder getDefaultDLBuilder(Context context){
        DLBuilder builder =  new DLBuilder();
@@ -92,11 +105,16 @@ public class DL {
        if (isExternalCanUser()){
            url = Environment.getExternalStorageDirectory()+"/DD/";
        }else {
-           url = context.getExternalCacheDir().getAbsolutePath()+"/DD/";
+           if (context != null) {
+               url = context.getExternalCacheDir().getAbsolutePath() + "/DD/";
+           }else {
+               throw new RuntimeException("need provide context");
+           }
        }
        builder.setDefaultPath(url);
        return builder;
     }
+
 
     private static boolean isExternalCanUser(){
         String state = Environment.getExternalStorageState();

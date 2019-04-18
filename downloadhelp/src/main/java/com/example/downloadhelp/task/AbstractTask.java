@@ -1,6 +1,5 @@
 package com.example.downloadhelp.task;
 
-import android.util.Log;
 import com.example.downloadhelp.listener.DLProgressListener;
 import com.example.downloadhelp.listener.State;
 import com.example.downloadhelp.listener.StateListener;

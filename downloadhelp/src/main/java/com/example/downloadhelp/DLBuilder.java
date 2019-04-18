@@ -2,7 +2,10 @@ package com.example.downloadhelp;
 
 import com.example.downloadhelp.cache.Save;
 import com.example.downloadhelp.converter.WriteEngine;
+import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.concurrent.ExecutorService;
 
 public class DLBuilder {
@@ -10,7 +13,6 @@ public class DLBuilder {
     private String defaultPath;
     private Save save;
     private ExecutorService executor;
-    private WriteEngine engine;
 
     public ExecutorService getExecutor() {
         return executor;
@@ -40,13 +42,6 @@ public class DLBuilder {
         return maxConcurrentCount;
     }
 
-    public WriteEngine getEngine() {
-        return engine;
-    }
-
-    public void setEngine(WriteEngine engine) {
-        this.engine = engine;
-    }
 
     public void setMaxConcurrentCount(int maxConcurrentCount) {
         this.maxConcurrentCount = maxConcurrentCount;

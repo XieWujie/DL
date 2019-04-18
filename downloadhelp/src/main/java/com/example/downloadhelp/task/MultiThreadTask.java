@@ -1,16 +1,12 @@
 package com.example.downloadhelp.task;
 
-import android.os.Handler;
-import android.os.Looper;
 import com.example.downloadhelp.listener.State;
 import com.example.downloadhelp.request.RequestOptions;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 

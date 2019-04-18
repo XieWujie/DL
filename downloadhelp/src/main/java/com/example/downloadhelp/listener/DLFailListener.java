@@ -1,6 +1,6 @@
 package com.example.downloadhelp.listener;
 
-public  interface DLFailListener extends DLListener{
+public  interface DLFailListener {
 
     void onFail(Exception e);
 }

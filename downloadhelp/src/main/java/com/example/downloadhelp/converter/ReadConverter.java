@@ -9,5 +9,4 @@ import java.io.File;
 public interface ReadConverter<Target>{
 
     void convert(RequestOptions options, File file, OnReadyListener<Target> listener);
-
 }

@@ -70,7 +70,7 @@ public class SimpleRequest<Resource> extends AbstractRequest<Resource> implement
 
     protected void strategy(){
         if (fetch != null) {
-            boolean have = fetch.fetch(options.getUrl(), options.resourceType, this);
+            boolean have = fetch.fetch(options, this);
             if (!have) {
                 runTask();
             }

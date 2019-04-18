@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.downloadhelp.DL
 import com.example.downloadhelp.DLManager
 import com.example.downloadhelp.request.Request
+import com.google.gson.Gson
 import java.io.File
 
 class MainViewModel : ViewModel() {
@@ -16,8 +17,8 @@ class MainViewModel : ViewModel() {
     val progress = MutableLiveData<Int>();
     private var request: Request<File>? = null;
 
-     fun test(strategy: Int, manager: DLManager) {
-        request = manager.load(s).threadMode(strategy).segment(5).submit()
+     fun test(strategy: Int) {
+        request = DL.load(s).threadMode(strategy).segment(5).submit()
         request?.registerProgressListener { loaded, totalLength ->
             progress.postValue(loaded)
             if (total.value != totalLength) {

@@ -25,10 +25,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun dispatchEvent(){
         bind.single.setOnClickListener {
-            model.test(RequestOptions.SINGLE_THREAD,DL.with(this))
+            model.test(RequestOptions.SINGLE_THREAD)
         }
         bind.multi.setOnClickListener {
-            model.test(RequestOptions.MULTI_THREAD,DL.with(this))
+            model.test(RequestOptions.MULTI_THREAD)
         }
         bind.pause.setOnClickListener {
             model.pause()

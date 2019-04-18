@@ -2,8 +2,6 @@ package com.example.downloadhelp.request;
 
 import com.example.downloadhelp.target.Target;
 
-import java.util.List;
-
 public class ResourceReadyCallback<Resource> implements Runnable {
 
     private Resource resource;

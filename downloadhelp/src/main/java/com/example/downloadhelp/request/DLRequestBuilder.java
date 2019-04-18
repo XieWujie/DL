@@ -7,8 +7,6 @@ import com.example.downloadhelp.DLUtil.Executors;
 import com.example.downloadhelp.cache.Fetch;
 import com.example.downloadhelp.cache.Save;
 import com.example.downloadhelp.converter.ReadConverter;
-import com.example.downloadhelp.listener.State;
-import com.example.downloadhelp.listener.StateListener;
 import com.example.downloadhelp.target.ImageViewTarget;
 import com.example.downloadhelp.target.Target;
 import com.example.downloadhelp.task.FileTask;
@@ -26,6 +24,7 @@ public class DLRequestBuilder<ResourceType> extends RequestOptions<DLRequestBuil
     private Save save;
     private Fetch fetch;
     private Target target;
+    private RequestOptions options;
 
 
     public DLRequestBuilder<ResourceType> load(@NotNull String url){
@@ -44,7 +43,7 @@ public class DLRequestBuilder<ResourceType> extends RequestOptions<DLRequestBuil
     }
 
     public Request<ResourceType> submit(){
-       return buildRequest();
+       return buildObservableRequest();
     }
 
     public DLRequestBuilder apply(Task task){
@@ -59,16 +58,31 @@ public class DLRequestBuilder<ResourceType> extends RequestOptions<DLRequestBuil
         return this;
     }
 
+    public DLRequestBuilder<ResourceType> apply(RequestOptions options){
+        this.options = options;
+        return this;
+    }
+
     public Request<ResourceType> into(@NotNull Target target){
         this.target = target;
-        return buildRequest();
+        return buildSimpleRequest();
     }
 
     public Request<ResourceType> into(@NotNull ImageView imageView){
         return into(new ImageViewTarget(imageView));
     }
 
-    private Request<ResourceType> buildRequest(){
+    private Request<ResourceType> buildSimpleRequest(){
+        if (task == null){
+            task = new FileTask(getOptions(),dl.getExecutor());
+        }
+        SimpleRequest<ResourceType> request = SimpleRequest.obtain();
+        Executor callbackExecutor = target==null?Executors.directExecutor():Executors.mainExecutor();
+        request.init(this,task,save,fetch,dl.getExecutor(),callbackExecutor,readConverter,target);
+        dlManager.addRequest(url,request);
+        return request;
+    }
+    private Request<ResourceType> buildObservableRequest(){
         if (task == null){
             task = new FileTask(getOptions(),dl.getExecutor());
         }
@@ -80,6 +94,9 @@ public class DLRequestBuilder<ResourceType> extends RequestOptions<DLRequestBuil
     }
 
     public RequestOptions getOptions(){
+        if (options != null){
+            return options;
+        }
         if (fileName == null){
             int lastIndex  = url.lastIndexOf("?");
             fileName = url.substring(url.lastIndexOf("/"),lastIndex==-1?url.length():lastIndex);

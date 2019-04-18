@@ -1,15 +1,12 @@
 package com.example.downloadhelp.task;
 
 
-import android.os.RecoverySystem;
 import android.util.Log;
-import com.example.downloadhelp.listener.DLProgressListener;
 import com.example.downloadhelp.listener.State;
 import com.example.downloadhelp.request.RequestOptions;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 class SingleThreadTask extends AbstractTask {
 

@@ -1,16 +1,25 @@
 package com.example.downloadhelp.request;
 
 import com.example.downloadhelp.Next;
-import com.example.downloadhelp.Obtain;
-import com.example.downloadhelp.listener.*;
+import com.example.downloadhelp.listener.DLCompleteListener;
+import com.example.downloadhelp.listener.DLFailListener;
+import com.example.downloadhelp.listener.DLProgressListener;
+import com.example.downloadhelp.listener.StateListener;
 
 import java.util.concurrent.Future;
+
 
 public interface Request<T> extends Next<Request<T>>
 {
 
+    /*
+    *开始request，不等于start
+     */
     void begin();
 
+    /*
+    *回收request，給request的各种属性赋null
+     */
     void recycle();
 
     void cancel();
@@ -18,6 +27,9 @@ public interface Request<T> extends Next<Request<T>>
 
     void pause();
 
+    /*
+    *start前需要调用begin，和pause对应
+     */
     void start();
 
     boolean isRecycler();
