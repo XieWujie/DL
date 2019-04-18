@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="match_parent">
+        <SeekBar android:layout_width="match_parent"
+                 android:id="@+id/seek_bar"
+                 android:layout_marginTop="50dp"
+                 android:layout_height="wrap_content"/>
+        <Button android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:text="单线程"
+                android:id="@+id/single"
+                android:layout_height="wrap_content"/>
+        <Button android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:text="多线程"
+                android:id="@+id/multi"
+                android:layout_height="wrap_content"/>
+        <Button android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:text="暂停"
+                android:id="@+id/pause"
+                android:layout_height="wrap_content"/>
+        <Button android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:text="开始"
+                android:id="@+id/start"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</layout>
